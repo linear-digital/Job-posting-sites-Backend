@@ -33,9 +33,7 @@ router.post('/register', async (req, res) => {
     const body = req.body
 
     try {
-        if (!body) {
-            return res.status(400).json({ message: "All fields are required" })
-        }
+ 
         const hashedPassword = await bcrypt.hash(body.password, 10)
 
         const newUser = new User({
@@ -54,7 +52,6 @@ router.post('/register', async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
-        console.error(error)
     }
 })
 
