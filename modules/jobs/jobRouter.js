@@ -34,7 +34,6 @@ router.post('/', recruiterChecker, async (req, res) => {
         res.send({ result, message: "Job Created Success" })
     } catch (error) {
         res.status(500).json({ message: error.message });
-
     }
 })
 // update a job post

@@ -85,4 +85,17 @@ router.post('/login', async (req, res) => {
     }
 })
 
+// update a user
+
+router.put('/:id', async (req, res) => {
+    const body = req.body
+    const id = req.params.id
+    try {
+        const data = await User.findByIdAndUpdate(id, body, { new: true })
+        res.send(data)
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+})
+
 module.exports = router
