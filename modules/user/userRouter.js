@@ -92,7 +92,7 @@ router.put('/:id', async (req, res) => {
     const id = req.params.id
     try {
         const data = await User.findByIdAndUpdate(id, body, { new: true })
-        res.send(data)
+        res.send({data, message: "User Updated Success"})
     } catch (error) {
         res.status(500).send({ message: error.message })
     }
