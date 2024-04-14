@@ -31,6 +31,32 @@ router.get('/', async (req, res) => {
         res.status(500).send({ message: error.message })
     }
 })
+router.post('/filter', async (req, res) => {
+    const query = req.body
+    const page = parseInt(req.query.page) || 1
+    const pageSize = parseInt(req.query.pageSize) || 50
+    const skip = (page - 1) * pageSize
+    // console.log(query, "query")
+    try {
+        const filters = {}
+        if (query) {
+            Object.keys(query).forEach((key) => {
+                if (query[key] !== "") {
+                    filters[key] = query[key];
+                }
+            });
+        }
+        // console.log(filters)
+        const data = await Job.find({ ...filters })
+            .populate("user", "name phone email location")
+            .skip(skip)
+            .limit(pageSize)
+            .exec()
+        res.send(data)
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+})
 // get a job 
 
 router.get('/:id', async (req, res) => {
