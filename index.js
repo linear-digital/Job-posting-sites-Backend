@@ -13,6 +13,7 @@ app.use(cors());
 // Routes 
 
 app.use('/api/user', require('./modules/user/userRouter'));
+app.use('/api/jobs', require('./modules/jobs/jobRouter'));
 
 
 // Connect Mongodb Database 

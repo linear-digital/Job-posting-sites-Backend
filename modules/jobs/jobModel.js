@@ -9,19 +9,25 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    descs: {
+    description: {
         type: String,
         required: true
     },
-    start: {
-        type: Number,
-        required: true
-    },
-
-    end: {
+    location: {
         type: String,
         required: true
     },
+    salary: {
+        start:  {
+            type: Number,
+        },
+        end:  {
+            type: Number,
+        }
+    },
+    details: {
+        type: String,
+    }
 }, { timestamps: true })
 
 const Job = mongoose.model("Job", jobSchema);
