@@ -101,8 +101,8 @@ router.get('/apply/:id', authChecker, async (req, res) => {
 router.get('/myapply/:id', authChecker, async (req, res) => {
     try {
         const result = await Apply.find({ user: req.params.id })
-            .populate("job", "title")
-            .exec()
+        .populate("job", "title status")
+        .exec()
         res.send(result)
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -112,6 +112,8 @@ router.get('/myapply/:id', authChecker, async (req, res) => {
 router.get('/jobapply/:id', authChecker, async (req, res) => {
     try {
         const result = await Apply.find({ job: req.params.id })
+        .populate("user", "name phone email location")
+        .exec()
         res.send(result)
     } catch (error) {
         res.status(500).json({ message: error.message });
