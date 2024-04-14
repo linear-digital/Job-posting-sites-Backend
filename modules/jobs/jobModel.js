@@ -18,12 +18,16 @@ const jobSchema = new mongoose.Schema({
         required: true
     },
     salary: {
-        start:  {
+        start: {
             type: Number,
         },
-        end:  {
+        end: {
             type: Number,
         }
+    },
+    status: {
+        type: String,
+        default: "active"
     },
     details: {
         type: String,
