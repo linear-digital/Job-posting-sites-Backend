@@ -113,7 +113,7 @@ router.post('/apply', authChecker, async (req, res) => {
 
 // get applys count
 
-router.get('/apply/:id', authChecker, async (req, res) => {
+router.get('/apply/:id', async (req, res) => {
 
     try {
         const result = await Apply.find({ job: req.params.id })
@@ -124,7 +124,7 @@ router.get('/apply/:id', authChecker, async (req, res) => {
     }
 })
 /// apply history for a user
-router.get('/myapply/:id', authChecker, async (req, res) => {
+router.get('/myapply/:id', async (req, res) => {
     try {
         const result = await Apply.find({ user: req.params.id })
         .populate("job", "title status")
@@ -135,7 +135,7 @@ router.get('/myapply/:id', authChecker, async (req, res) => {
     }
 })
 // apply history for a job
-router.get('/jobapply/:id', authChecker, async (req, res) => {
+router.get('/jobapply/:id', async (req, res) => {
     try {
         const result = await Apply.find({ job: req.params.id })
         .populate("user", "name phone email location")
