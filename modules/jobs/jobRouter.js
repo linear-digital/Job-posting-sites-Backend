@@ -88,11 +88,29 @@ router.post('/apply', authChecker, async (req, res) => {
 // get applys count
 
 router.get('/apply/:id', authChecker, async (req, res) => {
-    
+
     try {
         const result = await Apply.find({ job: req.params.id })
         const count = result.length
         res.send({ count, result })
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+/// apply history for a user
+router.get('/myapply/:id', authChecker, async (req, res) => {
+    try {
+        const result = await Apply.find({ user: req.params.id })
+        res.send(result)
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+// apply history for a job
+router.get('/jobapply/:id', authChecker, async (req, res) => {
+    try {
+        const result = await Apply.find({ job: req.params.id })
+        res.send(result)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
