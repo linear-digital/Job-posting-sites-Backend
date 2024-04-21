@@ -47,7 +47,7 @@ router.post('/register', async (req, res) => {
             const result = await newUser.save()
             const token = await tokenProvider(result)
 
-            res.cookie('accessToken', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000, domain: "localhost:5173" });
+            res.cookie('accessToken', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000, domain: "volunteering-society.netlify.app" });
             res.send({ message: "User Created Success", token })
         }
     } catch (error) {
@@ -74,7 +74,7 @@ router.post('/login', async (req, res) => {
         else {
           const token = await tokenProvider(user)
             // Set a cookie
-            res.cookie('accessToken', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000, domain: "localhost:5173" });
+            res.cookie('accessToken', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000, domain: "volunteering-society.netlify.app" });
             const data = await User.findOne({ email: user.email })
                 .select("-password")
                 .exec();
